@@ -1,6 +1,6 @@
 package main
 
-import(
+import (
 	"fmt"
 	"golang.org/x/tour/tree"
 )
@@ -19,7 +19,7 @@ func walkRecur(t *tree.Tree, ch chan int) {
 	walkRecur(t.Right, ch)
 }
 
-func Same(t1, t2 *tree.Tree)bool {
+func Same(t1, t2 *tree.Tree) bool {
 	ch1 := make(chan int)
 	go Walk(t1, ch1)
 	ch2 := make(chan int)
