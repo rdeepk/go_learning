@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Human struct {
 	name  string
@@ -37,11 +40,16 @@ type Men interface {
 	sing(lyrics string)
 }
 
+func (h Human) String() string {
+	return "Name:" + h.name + ", Age:" + strconv.Itoa(h.age) + " years, Contact:" + h.phone
+}
+
 func main() {
 	mike := Student{Human{"Mike", 24, "676-789-7878"}, "ABD School", 0}
 	sam := Student{Human{"Sam", 22, "678-7877"}, "Harvard", 100}
 	paul := Employee{Human{"Paul", 27, "676-4545"}, "Google", 1000}
 	tom := Employee{Human{"Tom", 32, "454-678-5677"}, "Twitter", 300}
+	siya := Human{"Siya", 21, "676-434-6564"}
 
 	var i Men
 	i = mike
@@ -61,4 +69,5 @@ func main() {
 	for _, t := range x {
 		t.sayHi()
 	}
+	fmt.Println("This is a Human", siya)
 }
