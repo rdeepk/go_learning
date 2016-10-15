@@ -1,4 +1,6 @@
-//This package sends a http get request to http://dev.markitondemand.com/ to get stock prices of some random companies. This is just an experiment to learn concurrency in Go
+//This package sends a http get request to http://dev.markitondemand.com/
+//to get stock prices of some random companies.
+//This is just an experiment to learn concurrency in Go.
 package main
 
 import (
