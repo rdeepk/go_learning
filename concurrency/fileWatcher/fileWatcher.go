@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -22,6 +23,7 @@ type Invoice struct {
 }
 
 func main() {
+	runtime.GOMAXPROCS(4)
 	for {
 		d, _ := os.Open(watchedPath)
 		//fmt.Println(a)
