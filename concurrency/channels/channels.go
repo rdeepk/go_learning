@@ -6,7 +6,18 @@ import (
 	"strings"
 )
 
-func main() {
+type Message struct {
+	To      []string
+	From    string
+	Content string
+}
+
+type FailedMessage struct {
+	ErrorMessage    string
+	OriginalMessage Message
+}
+
+func loops() {
 	phrase := "These are the times that try men's soul\n"
 
 	words := strings.Split(phrase, " ")
@@ -20,4 +31,27 @@ func main() {
 	for msg := range ch {
 		fmt.Print(msg + " ")
 	}
+}
+
+func main() {
+	loops()
+	msgCh := make(chan Message, 1)
+	errCh := make(chan FailedMessage, 1)
+
+	msg := Message{
+		To:      []string{"abc@abc.com"},
+		From:    "xyz@xyz.me",
+		Content: "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+	}
+
+	failedMessage := FailedMessage{
+		ErrorMessage:    "Message Error",
+		OriginalMessage: Message{},
+	}
+
+	msgCh <- msg
+	errCh <- failedMessage
+
+	fmt.Println(<-msgCh)
+	fmt.Println(<-errCh)
 }
