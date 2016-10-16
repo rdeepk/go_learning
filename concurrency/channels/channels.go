@@ -52,6 +52,12 @@ func main() {
 	msgCh <- msg
 	errCh <- failedMessage
 
-	fmt.Println(<-msgCh)
-	fmt.Println(<-errCh)
+	select {
+	case recievedMsg := <-msgCh:
+		fmt.Println(recievedMsg)
+	case recievedErr := <-errCh:
+		fmt.Println(recievedErr)
+	default:
+		fmt.Println("No Message Recieved")
+	}
 }
