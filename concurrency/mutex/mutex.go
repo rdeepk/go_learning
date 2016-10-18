@@ -29,17 +29,13 @@ func main() {
 		}
 	}()
 
-	mutex := make(chan bool, 1)
 	for i := 1; i < 10; i++ {
 		for j := 1; j < 10; j++ {
-			mutex <- true
-			go func() {
-				//the access of i and j in goroutines is wrong but this use is //just to arise the case of cuncurrent memory access
+			go func(i, j int) {
 				msg := fmt.Sprintf("%d + %d = %d\n", i, j, i+j)
 				logCh <- msg
 				fmt.Print(msg)
-				<-mutex
-			}()
+			}(i, j)
 		}
 	}
 	fmt.Scanln()
