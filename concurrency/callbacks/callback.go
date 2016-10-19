@@ -1,3 +1,4 @@
+//This package is for simulating callbacks with go channels
 package main
 
 import (
